@@ -4,7 +4,7 @@ const TELEGRAM_CHAT_ID = '8512088259';
 
 // Helper function to send message to Telegram
 async function sendToTelegram(message) {
-    if (TELEGRAM_BOT_TOKEN === '8611047796:AAGfTl6Xt11ql7-KDp8KhC_yuRI9aPk6pG8') {
+    if (TELEGRAM_BOT_TOKEN === 'TELEGRAM_BOT_TOKEN') {
         console.warn('Telegram Bot Token is not configured. Simulating success.');
         return new Promise(resolve => setTimeout(resolve, 1000));
     }
